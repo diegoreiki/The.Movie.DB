@@ -118,11 +118,14 @@ extension CatalogMoviesViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 0, left: 10, bottom: 16, right: 10)
+        return UIEdgeInsets.init(top: 0.5, left: 0.5, bottom: 0.5, right: 0.5);
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 158, height: 245)
+        let itemWidth = collectionView.bounds.width/3.2;
+        let itemHeight = itemWidth;
+        
+        return CGSize(width: itemWidth, height: itemHeight);
     }
 }
 
