@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  The.Movie.DB
-//
-//  Created by Diego Costa Pereira on 17/03/19.
-//  Copyright © 2019 Diego Costa Pereira. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
