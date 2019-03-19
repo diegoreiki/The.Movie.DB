@@ -33,7 +33,7 @@ class Movie: NSObject, Decodable {
     }
     
     //MARK: Methods
-    class func converterJSON(_ json: [[String: Any]]) -> Data?{
+    class func converterJSON(_ json: [[String: Any]]?) -> Data?{
         return try? JSONSerialization.data(withJSONObject: json, options: [])
     }
     

@@ -5,6 +5,7 @@ class CatalogMoviesViewController: UIViewController {
     //MARK: Property
     var genres = [Genre]()
     var movies = [Movie]()
+    var page = 1
     
     @IBOutlet weak var labelGenreMovie: UILabel!
     @IBOutlet weak var loading: UIActivityIndicatorView!
@@ -15,7 +16,7 @@ class CatalogMoviesViewController: UIViewController {
         super.viewDidLoad()
         
         setupGenres()
-        getPopularMovies(page: 1)
+        getPopularMovies(page: self.page)
         setLogoInNavigationBar()
     }
     
@@ -23,14 +24,15 @@ class CatalogMoviesViewController: UIViewController {
     func getPopularMovies(page: Int){
         loading.startAnimating()
         
-        MoviesApi().requestPopularMovies(page: page, returnMovies: { (movies) in
+        MoviesApi().requestPopularMovies(page: page, returnPopular: { (popular) in
             self.loading.stopAnimating()
             
-            guard let responseMovies = movies else {
+            guard let responsePopular = popular else {
                 Alert(controller: self).show(title: Constants.title.error, message: Constants.message.errorPopularmovies, titleButtonAction: "Ok", titleButtonCancel: nil, completion: nil)
                 return
             }
-            self.movies = responseMovies
+            self.page = responsePopular.page
+            self.movies = responsePopular.movie
             self.labelGenreMovie.text = "Filmes mais populares"
             
             self.collectionViewMovies.reloadData()
@@ -127,5 +129,13 @@ extension CatalogMoviesViewController: UICollectionViewDelegate, UICollectionVie
         
         return CGSize(width: itemWidth, height: itemHeight);
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let lastCell = movies.count - 1
+//        
+//        if indexPath.row == lastCell {
+//            self.getPopularMovies(page: self.page + 1)
+//        }
+//    }
 }
 
